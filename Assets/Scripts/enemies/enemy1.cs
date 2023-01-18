@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy1 : MonoBehaviour
+public class enemy1 : Enemy
 {
 
-    private float speed = 10f;
+    [SerializeField] private float speed = 10f;
 
     private void Update()
     {
