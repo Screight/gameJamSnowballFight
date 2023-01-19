@@ -14,6 +14,7 @@ public class enemy2 : MonoBehaviour
 
     private void Update()
     {
+
         shoot_interval -= Time.deltaTime;
 
         //Debug.Log(shoot_interval);
@@ -42,8 +43,13 @@ public class enemy2 : MonoBehaviour
 
     void shoot()
     {
+        Vector3 pos = GameObject.FindGameObjectWithTag("Player").transform.position;
+
         Projectile enemy_projectile = Instantiate(e_projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
-        enemy_projectile.Initialize(projectileSpeed, Vector3.forward);
+
+        Vector3 direction = (pos - transform.position).normalized;
+
+        enemy_projectile.Initialize(projectileSpeed, direction);
         //FireRate();
         Destroy(enemy_projectile, 10);
     }
