@@ -5,11 +5,31 @@ using UnityEngine;
 public class enemy3 : MonoBehaviour
 {
 
-    private float speed = 5f;
+    private bool stopped;
+    private bool canShoot = false;
+
+    [SerializeField] private float speed = 3f;
+
+    [SerializeField] float shoot_interval;
+
+    [SerializeField] GameObject e_projectile;
+    [SerializeField] float projectileSpeed;
 
     private void Update()
     {
-        Movement();
+        if (!stopped) {
+            Movement();
+        }
+        else
+        {
+            shoot_interval -= Time.deltaTime;
+
+            if (shoot_interval <= 0 && canShoot)
+            {
+                shoot();
+                shoot_interval = 3f;
+            }
+        }
     }
 
     void Movement()
@@ -27,7 +47,22 @@ public class enemy3 : MonoBehaviour
         if (other.gameObject.tag == "limite_catapulta")
         {
             Debug.Log("colisión epica");
-            speed = 0f;
+            stopped = true;
+            canShoot = true;
         }
+    }
+
+    void shoot() {
+        Debug.Log("disparo desde shoot()");
+        Projectile enemy_projectile = Instantiate(e_projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
+        enemy_projectile.Initialize(projectileSpeed, Vector3.up);
+        FireRate();
+    }
+
+    private IEnumerator FireRate()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(shoot_interval);
+        canShoot = true;
     }
 }
