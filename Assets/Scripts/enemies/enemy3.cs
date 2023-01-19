@@ -13,8 +13,7 @@ public class enemy3 : Enemy
     [SerializeField] float shoot_interval_publico;
     private float shoot_interval;
 
-    private float x;
-    private float z;
+    private BoxCollider x;
 
     [SerializeField] GameObject e_projectile;
     [SerializeField] float projectileSpeed;
@@ -61,15 +60,25 @@ public class enemy3 : Enemy
         Debug.Log("disparo desde shoot()");
         Big_Projectile enemy_projectile = Instantiate(e_projectile, transform.position, Quaternion.identity).GetComponent<Big_Projectile>();
         enemy_projectile.Initialize(projectileSpeed, Vector3.up);
-        FireRate();
+        Destroy(enemy_projectile.gameObject, 3f);
+        StartCoroutine(FireRate());
     }
 
     private IEnumerator FireRate()
     {
+        x = GameObject.FindGameObjectWithTag("destino_bola_grande").GetComponent<BoxCollider>();
+        
         canShoot = false;
-        yield return new WaitForSeconds(shoot_interval);
-        Big_Projectile enemy_projectile = Instantiate(e_projectile, new Vector3(), Quaternion.identity).GetComponent<Big_Projectile>();
-        enemy_projectile.Initialize(projectileSpeed, Vector3.down);
+        yield return new WaitForSeconds(shoot_interval_publico);
+
+        Vector3 spawnPosition;
+        spawnPosition.x = Random.Range(x.transform.position.x - x.size.x/2, x.transform.position.x + x.size.x / 2);
+        spawnPosition.y = 22;
+        spawnPosition.z = Random.Range(x.transform.position.z - x.size.z/2, x.transform.position.z + x.size.z / 2);
+
+        Big_Projectile enemy_projectile_down = Instantiate(e_projectile, spawnPosition, Quaternion.identity).GetComponent<Big_Projectile>();
+        Debug.Log("bola grande para abajo");
+        enemy_projectile_down.Initialize(projectileSpeed, Vector3.down);
 
         canShoot = true;
     }

@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8c3e735a63beb42b2a0d444f89872f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_maxHealth: 5
   speed: 3
   shoot_interval_publico: 3
   e_projectile: {fileID: 20121231670444287, guid: 1cfb90994eff8e74f8b72eaececb5563, type: 3}

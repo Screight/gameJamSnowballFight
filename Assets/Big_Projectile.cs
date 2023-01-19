@@ -7,10 +7,10 @@ public class Big_Projectile : MonoBehaviour
     [SerializeField] float m_speed;
     Vector3 m_direction;
 
-    private void Awake()
-    {
-        Destroy(gameObject, 5.0f);
-    }
+    //private void Awake()
+    //{
+    //    Destroy(gameObject, 5.0f);
+    //}
 
     public void Initialize(float p_speed, Vector3 p_direction)
     {
