@@ -15,6 +15,7 @@ public class enemy3 : Enemy
 
     private BoxCollider x;
 
+    [SerializeField] GameObject sombra;
     [SerializeField] GameObject e_projectile;
     [SerializeField] float projectileSpeed;
 
@@ -79,6 +80,21 @@ public class enemy3 : Enemy
         Big_Projectile enemy_projectile_down = Instantiate(e_projectile, spawnPosition, Quaternion.identity).GetComponent<Big_Projectile>();
         Debug.Log("bola grande para abajo");
         enemy_projectile_down.Initialize(projectileSpeed, Vector3.down);
+
+        Vector3 floor = transform.TransformDirection(Vector3.down);
+        RaycastHit hit;
+
+        Vector3 shadowPosition;
+        shadowPosition.x = spawnPosition.x;
+        shadowPosition.y = 0.01f;
+        shadowPosition.z = spawnPosition.z;
+
+        if (Physics.Raycast(enemy_projectile_down.transform.position, floor, out hit, 23))
+        {
+            Debug.Log(hit.transform.tag);
+            GameObject b_sombra = Instantiate(sombra, shadowPosition, sombra.transform.rotation);
+            enemy_projectile_down.sombra = b_sombra;
+        }
 
         canShoot = true;
     }

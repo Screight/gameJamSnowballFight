@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Big_Projectile : MonoBehaviour
 {
+    public GameObject sombra;
+
     [SerializeField] float m_speed;
     Vector3 m_direction;
 
@@ -27,6 +29,7 @@ public class Big_Projectile : MonoBehaviour
     {
         if (other.gameObject.tag == "destino_bola_grande")
         {
+            Destroy(sombra);
             Destroy(gameObject);
         }
     }
