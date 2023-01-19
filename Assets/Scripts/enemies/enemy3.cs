@@ -13,7 +13,7 @@ public class enemy3 : Enemy
     [SerializeField] float shoot_interval_publico;
     private float shoot_interval;
 
-    private BoxCollider x;
+    private BoxCollider spawnRange;
 
     [SerializeField] GameObject sombra;
     [SerializeField] GameObject e_projectile;
@@ -51,14 +51,14 @@ public class enemy3 : Enemy
     {
         if (other.gameObject.tag == "limite_catapulta")
         {
-            Debug.Log("colisión epica");
+            //Debug.Log("colisión epica");
             stopped = true;
             canShoot = true;
         }
     }
     
     void shoot() {
-        Debug.Log("disparo desde shoot()");
+        //Debug.Log("disparo desde shoot()");
         Big_Projectile enemy_projectile = Instantiate(e_projectile, transform.position, Quaternion.identity).GetComponent<Big_Projectile>();
         enemy_projectile.Initialize(projectileSpeed, Vector3.up);
         Destroy(enemy_projectile.gameObject, 3f);
@@ -67,18 +67,18 @@ public class enemy3 : Enemy
 
     private IEnumerator FireRate()
     {
-        x = GameObject.FindGameObjectWithTag("destino_bola_grande").GetComponent<BoxCollider>();
+        spawnRange = GameObject.FindGameObjectWithTag("destino_bola_grande").GetComponent<BoxCollider>();
         
         canShoot = false;
         yield return new WaitForSeconds(shoot_interval_publico);
 
         Vector3 spawnPosition;
-        spawnPosition.x = Random.Range(x.transform.position.x - x.size.x/2, x.transform.position.x + x.size.x / 2);
+        spawnPosition.x = Random.Range(spawnRange.transform.position.x - spawnRange.size.x/2, spawnRange.transform.position.x + spawnRange.size.x / 2);
         spawnPosition.y = 22;
-        spawnPosition.z = Random.Range(x.transform.position.z - x.size.z/2, x.transform.position.z + x.size.z / 2);
+        spawnPosition.z = Random.Range(spawnRange.transform.position.z - spawnRange.size.z/2, spawnRange.transform.position.z + spawnRange.size.z / 2);
 
         Big_Projectile enemy_projectile_down = Instantiate(e_projectile, spawnPosition, Quaternion.identity).GetComponent<Big_Projectile>();
-        Debug.Log("bola grande para abajo");
+        //Debug.Log("bola grande para abajo");
         enemy_projectile_down.Initialize(projectileSpeed, Vector3.down);
 
         Vector3 floor = transform.TransformDirection(Vector3.down);
@@ -91,7 +91,7 @@ public class enemy3 : Enemy
 
         if (Physics.Raycast(enemy_projectile_down.transform.position, floor, out hit, 23))
         {
-            Debug.Log(hit.transform.tag);
+            //Debug.Log(hit.transform.tag);
             GameObject b_sombra = Instantiate(sombra, shadowPosition, sombra.transform.rotation);
             enemy_projectile_down.sombra = b_sombra;
         }
