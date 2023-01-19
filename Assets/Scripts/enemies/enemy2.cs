@@ -5,9 +5,12 @@ using UnityEngine;
 public class enemy2 : MonoBehaviour
 {
 
-    private float speed = 7f;
+    [SerializeField] private float speed = 5f;
 
-    private float shoot_interval = 3f;
+    [SerializeField] private float shoot_interval = 2f;
+
+    [SerializeField] GameObject e_projectile;
+    [SerializeField] float projectileSpeed;
 
     private void Update()
     {
@@ -15,10 +18,11 @@ public class enemy2 : MonoBehaviour
 
         //Debug.Log(shoot_interval);
 
-        if (shoot_interval <= 0) {
+        if (shoot_interval <= 0)
+        {
 
-            //shoot();
-            //yield return new WaitForSeconds(shoot_interval);
+            shoot();
+            shoot_interval = 3f;
         }
         else
         {
@@ -36,7 +40,18 @@ public class enemy2 : MonoBehaviour
 
     }
 
-    void shoot() {
-        
+    void shoot()
+    {
+        Projectile enemy_projectile = Instantiate(e_projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
+        enemy_projectile.Initialize(projectileSpeed, Vector3.forward);
+        //FireRate();
+        Destroy(enemy_projectile, 10);
     }
+
+    //private IEnumerator FireRate()
+    //{
+    //    speed = 0;
+    //    yield return new WaitForSeconds(shoot_interval);
+    //    speed = 5f;
+    //}
 }
