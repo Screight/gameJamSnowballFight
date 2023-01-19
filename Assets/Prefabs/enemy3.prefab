@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  shoot_interval: 3
+  shoot_interval_publico: 3
   e_projectile: {fileID: 20121231670444287, guid: 1cfb90994eff8e74f8b72eaececb5563, type: 3}
   projectileSpeed: 7
 --- !u!54 &836645881650205391

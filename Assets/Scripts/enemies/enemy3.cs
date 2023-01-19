@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy3 : MonoBehaviour
+public class enemy3 : Enemy
 {
 
     private bool stopped;
@@ -10,13 +10,18 @@ public class enemy3 : MonoBehaviour
 
     [SerializeField] private float speed = 3f;
 
-    [SerializeField] float shoot_interval;
+    [SerializeField] float shoot_interval_publico;
+    private float shoot_interval;
+
+    private float x;
+    private float z;
 
     [SerializeField] GameObject e_projectile;
     [SerializeField] float projectileSpeed;
 
     private void Update()
     {
+
         if (!stopped) {
             Movement();
         }
@@ -27,7 +32,7 @@ public class enemy3 : MonoBehaviour
             if (shoot_interval <= 0 && canShoot)
             {
                 shoot();
-                shoot_interval = 3f;
+                shoot_interval = shoot_interval_publico;
             }
         }
     }
@@ -51,10 +56,10 @@ public class enemy3 : MonoBehaviour
             canShoot = true;
         }
     }
-
+    
     void shoot() {
         Debug.Log("disparo desde shoot()");
-        Projectile enemy_projectile = Instantiate(e_projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
+        Big_Projectile enemy_projectile = Instantiate(e_projectile, transform.position, Quaternion.identity).GetComponent<Big_Projectile>();
         enemy_projectile.Initialize(projectileSpeed, Vector3.up);
         FireRate();
     }
@@ -63,6 +68,9 @@ public class enemy3 : MonoBehaviour
     {
         canShoot = false;
         yield return new WaitForSeconds(shoot_interval);
+        Big_Projectile enemy_projectile = Instantiate(e_projectile, new Vector3(), Quaternion.identity).GetComponent<Big_Projectile>();
+        enemy_projectile.Initialize(projectileSpeed, Vector3.down);
+
         canShoot = true;
     }
 }
