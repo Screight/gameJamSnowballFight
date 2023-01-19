@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] GameObject m_projectilePrefab;
 
+    [SerializeField] Transform m_throwBallPositionTr;
+
     private void OnEnable()
     {
         PlayerInputManager.Instance.AddListenerToShootEvent(Shoot);
@@ -43,7 +45,7 @@ public class Player : MonoBehaviour
 
     void Shoot()
     {
-        Projectile projectile =  Instantiate(m_projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+        Projectile projectile =  Instantiate(m_projectilePrefab, m_throwBallPositionTr.position, Quaternion.identity).GetComponent<Projectile>();
         projectile.Initialize(m_projectileSpeed, Vector3.forward);
     }
 
