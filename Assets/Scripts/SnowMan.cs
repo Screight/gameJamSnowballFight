@@ -12,12 +12,16 @@ public class SnowMan : Interactive
     [SerializeField] GameObject m_snowmanGO;
     [SerializeField] GameObject m_snowAmountGO;
 
+    [SerializeField] int m_maxHealth = 3;
+    [SerializeField] int m_health;
+
     bool m_isSnowmanAlive = true;
 
     private void Awake()
     {
         m_globalCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
         m_globalCanvas.SetActive(false);
+        m_health = m_maxHealth;
     }
 
     protected override void HandleInteraction()
@@ -37,6 +41,23 @@ public class SnowMan : Interactive
         }
     }
 
+    public void Damage()
+    {
+        m_health--;
+        if(m_health <= 0)
+        {
+            DestroySnowMan();
+        }
+    }
+
+    void DestroySnowMan()
+    {
+        m_isSnowmanAlive = false;
+        m_snowmanGO.SetActive(false);
+        m_snowAmountGO.SetActive(true);
+        m_interactTMP.text = "Charge";
+    }
+
     protected override void OnTriggerEnter(Collider p_collider)
     {
         base.OnTriggerEnter(p_collider);
@@ -50,4 +71,5 @@ public class SnowMan : Interactive
         if (p_collider.tag != "Player") { return; }
         m_globalCanvas.SetActive(false);
     }
+
 }
