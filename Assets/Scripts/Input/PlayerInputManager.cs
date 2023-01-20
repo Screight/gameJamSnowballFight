@@ -28,11 +28,22 @@ public class PlayerInputManager : Singleton<PlayerInputManager>
         m_shootEvent.RemoveListener(p_action);
     }
 
+    UnityEvent m_pauseEvent;
+    public void AddListenerToPauseEvent(UnityAction p_action)
+    {
+        m_pauseEvent.AddListener(p_action);
+    }
+    public void RemoveListenerFromPauseEvent(UnityAction p_action)
+    {
+        m_pauseEvent.RemoveListener(p_action);
+    }
+
     protected override void Awake()
     {
         base.Awake();
         m_reloadEvent = new UnityEvent();
         m_shootEvent = new UnityEvent();
+        m_pauseEvent = new UnityEvent();
     }
 
     private void Update() {
@@ -49,10 +60,9 @@ public class PlayerInputManager : Singleton<PlayerInputManager>
 
         m_inputActions.Player.Movement.performed += MovementCallback;
         m_inputActions.Player.Movement.canceled += StopMovementCallback;
-
-
         m_inputActions.Player.Reload.performed += ReloadCallback;
         m_inputActions.Player.Shoot.performed += ShootCallback;
+        m_inputActions.Player.Pause.performed += PauseCallback;
     }
 
     private void OnDisable()
@@ -62,6 +72,7 @@ public class PlayerInputManager : Singleton<PlayerInputManager>
         m_inputActions.Player.Movement.canceled -= StopMovementCallback;
         m_inputActions.Player.Reload.performed -= ReloadCallback;
         m_inputActions.Player.Shoot.performed -= ShootCallback;
+        m_inputActions.Player.Pause.performed -= PauseCallback;
     }
 
     private void MovementCallback(InputAction.CallbackContext p_context)
@@ -82,6 +93,11 @@ public class PlayerInputManager : Singleton<PlayerInputManager>
     void ShootCallback(InputAction.CallbackContext p_context)
     {
         m_shootEvent.Invoke();
+    }
+
+    private void PauseCallback(InputAction.CallbackContext p_context)
+    {
+        m_pauseEvent.Invoke();
     }
 
     public Vector2 MovementInput { get { return m_movementInput; } }

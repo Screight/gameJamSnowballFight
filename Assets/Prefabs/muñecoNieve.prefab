@@ -95,9 +95,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4019946708370510401}
-  - component: {fileID: 331818419026315752}
   - component: {fileID: 8302028509087476609}
   - component: {fileID: 7983847562171238928}
+  - component: {fileID: 4137086095170342645}
   m_Layer: 0
   m_Name: Collision
   m_TagString: Untagged
@@ -120,20 +120,6 @@ Transform:
   m_Father: {fileID: 1926221700381568540}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &331818419026315752
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4291002679073998427}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.37
-  m_Height: 1.2
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: -0.2}
 --- !u!114 &8302028509087476609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +149,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!65 &4137086095170342645
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4291002679073998427}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.64, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.15}
 --- !u!1001 &79453441801179295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -228,7 +227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 890153665647438280, guid: f746697135c16464ebf8b3064c0be9bb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2379999
+      value: -0.52
       objectReference: {fileID: 0}
     - target: {fileID: 890153665647438280, guid: f746697135c16464ebf8b3064c0be9bb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -330,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1ed652b5f5638b94983d8c424a44a550, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1ed652b5f5638b94983d8c424a44a550, type: 3}
       propertyPath: m_LocalRotation.w
@@ -368,6 +367,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "mu\xF1ecoNieve"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1ed652b5f5638b94983d8c424a44a550, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ed652b5f5638b94983d8c424a44a550, type: 3}
 --- !u!4 &4664042503995901091 stripped
@@ -401,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2630900229542942861, guid: 4218c9df3611d9f4f9347768948164cc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.807
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2630900229542942861, guid: 4218c9df3611d9f4f9347768948164cc, type: 3}
       propertyPath: m_LocalRotation.w

@@ -23,7 +23,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
         private set { }
     }
 
-    protected void Initialize()
+    protected virtual void Initialize()
     {
 
     }
