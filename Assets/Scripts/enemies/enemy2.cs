@@ -9,6 +9,8 @@ public class enemy2 : Enemy
 
     [SerializeField] private float shoot_interval = 2f;
 
+    private bool canMove = true;
+
     [SerializeField] GameObject e_projectile;
     [SerializeField] float projectileSpeed;
 
@@ -21,13 +23,15 @@ public class enemy2 : Enemy
 
         if (shoot_interval <= 0)
         {
-
             shoot();
             shoot_interval = 3f;
         }
         else
         {
-            Movement();
+            if (canMove)
+            {
+                Movement();
+            }
         }
     }
 
@@ -50,14 +54,15 @@ public class enemy2 : Enemy
         Vector3 direction = (pos - transform.position).normalized;
 
         enemy_projectile.Initialize(projectileSpeed, direction);
-        //FireRate();
-        //Destroy(enemy_projectile, 10);
     }
 
-    //private IEnumerator FireRate()
-    //{
-    //    speed = 0;
-    //    yield return new WaitForSeconds(shoot_interval);
-    //    speed = 5f;
-    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "limite_shooter")
+        {
+            speed = 0;
+            canMove = false;
+        }
+    }
+
 }
