@@ -9,17 +9,20 @@ public class spawner_muñecos : MonoBehaviour
     public float spawnIntervalPublico;
     private float spawnInterval;
 
-    private int muñecosSpawned;
     private int maxMuñecos = 3;
 
     private BoxCollider spawnRange;
 
     private void Update()
     {
-        spawnInterval -= Time.deltaTime;
-        if (spawnInterval <= 0) {
-            StartCoroutine(spawnMuñecos());
-            spawnInterval = spawnIntervalPublico;
+        if(GameManager.Instance.SnowmanCounter < 3)
+        {
+            spawnInterval -= Time.deltaTime;
+            if (spawnInterval <= 0)
+            {
+                StartCoroutine(spawnMuñecos());
+                spawnInterval = spawnIntervalPublico;
+            }
         }
     }
 
@@ -31,14 +34,14 @@ public class spawner_muñecos : MonoBehaviour
 
         Vector3 spawnPosition;
         spawnPosition.x = Random.Range(spawnRange.transform.position.x - spawnRange.size.x / 2, spawnRange.transform.position.x + spawnRange.size.x / 2);
-        spawnPosition.y = 1;
+        spawnPosition.y = 0.5f;
         spawnPosition.z = Random.Range(spawnRange.transform.position.z - spawnRange.size.z / 2, spawnRange.transform.position.z + spawnRange.size.z / 2);
         
-        if (muñecosSpawned < maxMuñecos)
+        if (GameManager.Instance.SnowmanCounter < maxMuñecos)
         {
             Debug.Log("spawneando muñeco");
             GameObject muñecoSpawned = Instantiate(muñeco, spawnPosition, muñeco.transform.rotation);
-            muñecosSpawned++;
+            GameManager.Instance.SnowmanCounter++;
         }
 
         yield return new WaitForSeconds(spawnInterval);

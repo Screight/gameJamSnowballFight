@@ -45,8 +45,20 @@ public class Player : MonoBehaviour
 
     void Shoot()
     {
+        if (GameManager.Instance.SnowballCounter <= 0) return;
+
+        GameManager.Instance.SnowballCounter--;
         Projectile projectile =  Instantiate(m_projectilePrefab, m_throwBallPositionTr.position, Quaternion.identity).GetComponent<Projectile>();
         projectile.Initialize(m_projectileSpeed, Vector3.forward);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "enemy_projectile")
+        {
+            GameManager.Instance.Health--;
+            Destroy(other.gameObject);
+        }
     }
 
 }

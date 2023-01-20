@@ -51,7 +51,7 @@ public class enemy2 : Enemy
 
         enemy_projectile.Initialize(projectileSpeed, direction);
         //FireRate();
-        Destroy(enemy_projectile, 10);
+        //Destroy(enemy_projectile, 10);
     }
 
     //private IEnumerator FireRate()
