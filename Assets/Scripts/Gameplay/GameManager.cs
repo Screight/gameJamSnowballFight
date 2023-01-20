@@ -17,6 +17,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] TMPro.TextMeshProUGUI m_snowballCounterText;
 
     [SerializeField] MenuManager m_menuManager;
+    [SerializeField] GameObject[] m_gameUI;
     Image m_menuOverlay;
 
     private void OnEnable()
@@ -42,6 +43,10 @@ public class GameManager : Singleton<GameManager>
         m_isGamePaused = true;
         m_menuManager.GoTo(1);
         m_menuOverlay.enabled = true;
+        foreach(GameObject gO in m_gameUI)
+        {
+            gO.SetActive(false);
+        }
     }
 
     public void ResumeGame()
@@ -50,6 +55,10 @@ public class GameManager : Singleton<GameManager>
         m_isGamePaused = false;
         m_menuManager.GoTo(0);
         m_menuOverlay.enabled = false;
+        foreach (GameObject gO in m_gameUI)
+        {
+            gO.SetActive(true);
+        }
     }
 
     protected override void Awake()
