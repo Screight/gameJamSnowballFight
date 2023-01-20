@@ -63,6 +63,18 @@ public class enemy2 : Enemy
             speed = 0;
             canMove = false;
         }
+
+        if (other.tag == "player_projectile")
+        {
+            m_health--;
+            if (m_health <= 0)
+            {
+                Die();
+                GameManager.Instance.Score += m_score;
+            }
+            Destroy(other.gameObject);
+        }
+
     }
 
 }

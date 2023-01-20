@@ -19,6 +19,7 @@ public class enemy3 : Enemy
     [SerializeField] GameObject e_projectile;
     [SerializeField] float projectileSpeed;
 
+
     private void Update()
     {
 
@@ -54,6 +55,16 @@ public class enemy3 : Enemy
             //Debug.Log("colisión epica");
             stopped = true;
             canShoot = true;
+        }
+        if (other.tag == "player_projectile")
+        {
+            m_health--;
+            if (m_health <= 0)
+            {
+                Die();
+                GameManager.Instance.Score += m_score;
+            }
+            Destroy(other.gameObject);
         }
     }
     

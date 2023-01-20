@@ -18,4 +18,19 @@ public class enemy1 : Enemy
 
         transform.Translate(direction * speed * Time.deltaTime);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "player_projectile")
+        {
+            m_health--;
+            if (m_health <= 0)
+            {
+                Die();
+                GameManager.Instance.Score += m_score;
+            }
+            Destroy(other.gameObject);
+        }
+    }
+
 }

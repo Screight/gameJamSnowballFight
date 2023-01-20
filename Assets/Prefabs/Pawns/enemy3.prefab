@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 816907555507875558}
   m_Layer: 0
   m_Name: enemy3
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHealth: 5
   m_damageOnCollision: 2
+  m_score: 0
   speed: 3
   shoot_interval_publico: 3
   sombra: {fileID: 896377713592789577, guid: 634357f9dee65fd4bbfffa31c0356579, type: 3}
@@ -81,8 +82,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0.59, z: 0}
+  m_Radius: 1.37
+  m_Center: {x: 0, y: 0.92, z: 0}
 --- !u!1001 &240491906636994655
 PrefabInstance:
   m_ObjectHideFlags: 0

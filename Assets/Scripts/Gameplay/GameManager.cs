@@ -70,11 +70,28 @@ public class GameManager : Singleton<GameManager>
         Health = m_maxHealth;
     }
 
+    [SerializeField] TMPro.TextMeshProUGUI m_lastScoreText;
+    [SerializeField] TMPro.TextMeshProUGUI m_gameOverText;
+
     public int Health { 
         get { return m_health; }
         set {
             m_health = value;
             m_healthText.text = "Health " + m_health.ToString();
+
+            if(m_health <= 0)
+            {
+                m_lastScoreText.gameObject.SetActive(true);
+                m_gameOverText.gameObject.SetActive(true);
+
+                Time.timeScale = 0;
+                m_lastScoreText.text = m_score.ToString();
+                foreach (GameObject gO in m_gameUI)
+                {
+                    gO.SetActive(false);
+                }
+            }
+
         } 
     }
 

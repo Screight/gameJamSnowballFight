@@ -6,7 +6,7 @@ public class DamageDetection : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "enemy") return;
+        if (other.gameObject.tag != "enemy") return;
 
         GameManager.Instance.Health -= other.GetComponent<Enemy>().DamageOnCollision;
 

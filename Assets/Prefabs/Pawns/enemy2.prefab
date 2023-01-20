@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 33678887}
   m_Layer: 0
   m_Name: enemy2
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,6 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHealth: 5
   m_damageOnCollision: 2
+  m_score: 0
   speed: 2
   shoot_interval: 2
   e_projectile: {fileID: 20121231670444287, guid: 41b4f5f430818be4599316bf796a7b01, type: 3}
