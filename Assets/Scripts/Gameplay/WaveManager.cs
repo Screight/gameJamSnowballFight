@@ -39,7 +39,7 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        if (m_areAnyEnemyLeft)
+        if (AreAnyEnemiesLeft())
         {
             m_currentTime += Time.deltaTime;
 
@@ -49,7 +49,21 @@ public class WaveManager : MonoBehaviour
                 SpawnEnemies();
             }
         }
+        else
+        {
+            m_timeNextWave += Time.deltaTime;
+            GameManager.Instance.SetWaveCounter((int)m_periodNextWave - (int)m_timeNextWave);
+            if (m_timeNextWave >= m_periodNextWave)
+            {
+                m_timeNextWave = 0;
+                InitializeNextWave();
+                GameManager.Instance.SetWaveCounter(0);
+            }
+        }
     }
+
+    float m_timeNextWave;
+    float m_periodNextWave = 5;
 
     [SerializeField] BoxCollider m_spawnCollider;
 
@@ -97,6 +111,7 @@ public class WaveManager : MonoBehaviour
 
         }
         m_areAnyEnemyLeft = true;
+        GameManager.Instance.SetWaveCounterTo(m_currentWave);
     }
 
     bool AreAnyEnemiesLeft()

@@ -16,6 +16,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] TMPro.TextMeshProUGUI m_healthText;
     [SerializeField] TMPro.TextMeshProUGUI m_snowballCounterText;
 
+    [SerializeField] TMPro.TextMeshProUGUI m_waveCounterText;
+    [SerializeField] TMPro.TextMeshProUGUI m_nextWaveCounterText;
+
     [SerializeField] MenuManager m_menuManager;
     [SerializeField] GameObject[] m_gameUI;
     Image m_menuOverlay;
@@ -91,6 +94,23 @@ public class GameManager : Singleton<GameManager>
         {
             m_snowballCounter = value;
             m_snowballCounterText.text = m_snowballCounter.ToString();
+        }
+    }
+
+    public void SetWaveCounterTo(int p_value)
+    {
+        m_waveCounterText.text = "Wave " + p_value;
+    }
+
+    public void SetWaveCounter(int p_value)
+    {
+        if(p_value == 0)
+        {
+            m_nextWaveCounterText.text = "";
+        }
+        else
+        {
+            m_nextWaveCounterText.text = p_value.ToString();
         }
     }
 
